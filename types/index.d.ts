@@ -41,6 +41,7 @@ export interface InitializeOptions {
     titleCase?: boolean;
     gaOptions?: GaOptions;
     alwaysSendToDefaultTracker?: boolean;
+    standardImplementation?: boolean;
 }
 
 export type Tracker = {
@@ -80,11 +81,12 @@ export interface OutboundLinkProps {
     to: string;
     target?: string;
     onClick?: Function;
+    trackerNames?: TrackerNames
 }
 
 export function initialize(trackingCode: string, options?: InitializeOptions): void;
 export function initialize(trackers: Tracker[], options?: InitializeOptions): void;
-export function ga(...args: any): void;
+export function ga(...args: any[]) : any;
 export function resetCalls() : void;
 export function set(fieldsObject: FieldsObject, trackerNames?: TrackerNames): void;
 export function send(fieldsObject: FieldsObject, trackerNames?: TrackerNames): void;

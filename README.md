@@ -114,7 +114,7 @@ ReactGA.initialize([{
 |options.titleCase| `Boolean`. Optional. Defaults to `true`. If set to `false`, strings will not be converted to title case before sending to GA.|
 |options.gaOptions| `Object`. Optional. [GA configurable create only fields.](https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference)|
 |options.gaAddress| `String`. Optional. If you are self-hosting your `analytics.js`, you can specify the URL for it here.
-|options.alwaysSendToDefaultTracker| `Boolean`. Optional. Defaults to `true`. If set to `false` _and_ using multiple trackers, the event wll not be send to the default tracker.|
+|options.alwaysSendToDefaultTracker| `Boolean`. Optional. Defaults to `true`. If set to `false` _and_ using multiple trackers, the event will not be send to the default tracker.|
 |options.testMode| `Boolean`. Optional. Defaults to `false`. Enables test mode. See [here](https://github.com/react-ga/react-ga#test-mode) for more information.|
 |options.standardImplementation| `Boolean`. Optional. Defaults to `false`. Enables loading GA as google expects it. See [here](https://github.com/react-ga/react-ga#standard-implementation) for more information.|
 
@@ -246,7 +246,7 @@ ga('send', 'timing', 'JS Libraries', 'load', 20, 'CDN libs');
 |args.category|`String`. Required. A string for categorizing all user timing variables into logical groups.|
 |args.variable|`String`. Required. Name of the variable being recorded.|
 |args.value|`Int`. Required. Number of milliseconds elapsed time to report.|
-|args.label|`String`. Optional. It can improved visibility in user timing reports.|
+|args.label|`String`. Optional. It can be used to add flexibility in visualizing user timings in the reports.|
 
 #### ReactGA.ga()
 
@@ -282,13 +282,14 @@ ReactGA.outboundLink({
   label: 'Clicked Create an Account'
 }, function () {
   console.log('redirect here');
-});
+}, ['tracker2']);
 ```
 
 |Value|Notes|
 |------|-----|
 |args.label|`String`. Required. Description of where the outbound link points to. Either as a URL, or a string.|
 |hitCallback|`function`. The react-ga implementation accounts for the possibility that GA servers are down, or GA is blocked, by using a fallback 250ms timeout. See [notes in GA Dev Guide](https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#hitCallback)|
+|trackerNames|`Array<String>` Optional. A list of extra trackers to run the command on.
 
 ### `<OutboundLink>` Component
 
@@ -305,7 +306,9 @@ render() {
       <ReactGA.OutboundLink
         eventLabel="myLabel"
         to="http://www.example.com"
-        target="_blank">
+        target="_blank"
+        trackerNames={['tracker2']}
+      >
         My Link
       </ReactGA.OutboundLink>
     </div>
@@ -318,6 +321,7 @@ render() {
 |eventLabel|`String`. Required. Description of where the outbound link points to. Either as a URL, or a string.|
 |to|`String`. Required. URL the link leads to.|
 |target|`String`. Optional. To open the link in a new tab, use a value of `_blank`.|
+|trackerNames|`Array<String>` Optional. A list of extra trackers to run the command on.
 
 For bower, use the `<ReactGA.OutboundLink>` component.
 
